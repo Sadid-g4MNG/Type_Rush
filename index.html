@@ -992,6 +992,8 @@ footer a:hover { text-decoration: underline; }
 </script>
 
 <!-- Type Rush: Buy the Creator a Doughnut -->
+
+<!-- ===== DOUGHNUT POPUP ===== -->
 <style>
   #donut-float {
     position: fixed;
@@ -1001,20 +1003,20 @@ footer a:hover { text-decoration: underline; }
     display: flex;
     align-items: center;
     gap: 10px;
+    padding: 12px 15px;
     border: 1px solid #ffffff24;
     border-radius: 999px;
-    padding: 12px 15px;
     background: #181818;
     color: white;
-    cursor: pointer;
     box-shadow: 0 8px 30px #0004;
-    transition: transform .25s, background .25s;
+    cursor: pointer;
+    transition: transform .2s, background .2s;
     font: inherit;
   }
 
   #donut-float:hover {
-    transform: translateY(-4px) scale(1.03);
-    background: #29221f;
+    transform: translateY(-3px);
+    background: #302722;
   }
 
   #donut-icon {
@@ -1026,12 +1028,12 @@ footer a:hover { text-decoration: underline; }
     opacity: 0;
     overflow: hidden;
     white-space: nowrap;
-    transition: max-width .3s, opacity .3s;
+    transition: max-width .25s, opacity .25s;
   }
 
   #donut-float:hover #donut-label,
   #donut-float:focus-visible #donut-label {
-    max-width: 220px;
+    max-width: 230px;
     opacity: 1;
   }
 
@@ -1048,15 +1050,14 @@ footer a:hover { text-decoration: underline; }
 
   #donut-modal.open {
     display: grid;
-    animation: donutFade .2s ease;
   }
 
   #donut-card {
     position: relative;
     width: min(490px, 100%);
     max-height: 85vh;
-    overflow: auto;
-    padding: 30px;
+    overflow-y: auto;
+    padding: 28px;
     border: 1px solid #ffffff1c;
     border-radius: 22px;
     background: #171717;
@@ -1067,35 +1068,34 @@ footer a:hover { text-decoration: underline; }
 
   #donut-card h2 {
     margin: 8px 0;
-    font-size: 27px;
+    font-size: 26px;
   }
 
   #donut-card p {
     color: #bdbdbd;
-    line-height: 1.65;
+    line-height: 1.6;
   }
 
   #donut-close {
     position: absolute;
-    top: 14px;
+    top: 12px;
     right: 16px;
     border: 0;
     background: transparent;
     color: #ccc;
-    font-size: 25px;
+    font-size: 27px;
     cursor: pointer;
   }
 
   .donut-contact {
     display: block;
-    margin-top: 12px;
-    padding: 13px 15px;
+    margin-top: 10px;
+    padding: 13px;
     border: 1px solid #ffffff18;
     border-radius: 12px;
     color: #f5f5f5;
     text-decoration: none;
     overflow-wrap: anywhere;
-    transition: background .2s;
   }
 
   .donut-contact:hover {
@@ -1104,7 +1104,7 @@ footer a:hover { text-decoration: underline; }
 
   #cat-playground {
     position: relative;
-    height: 145px;
+    height: 150px;
     margin: 18px 0;
     overflow: hidden;
     border: 1px solid #ffffff12;
@@ -1116,21 +1116,22 @@ footer a:hover { text-decoration: underline; }
 
   #chase-cat {
     position: absolute;
-    left: 40%;
-    top: 35px;
-    font-size: 48px;
+    left: 0;
+    top: 0;
+    font-size: 43px;
     line-height: 1;
     pointer-events: none;
+    user-select: none;
     will-change: transform;
-    transition: transform .12s ease-out;
-    filter: drop-shadow(0 5px 4px #0006);
+    transform-origin: center;
   }
 
   #cat-speech {
     position: absolute;
-    top: 12px;
-    left: 12px;
-    max-width: 190px;
+    top: 10px;
+    left: 10px;
+    z-index: 1;
+    max-width: 210px;
     padding: 7px 10px;
     border-radius: 12px 12px 12px 3px;
     background: #fff1dc;
@@ -1141,8 +1142,10 @@ footer a:hover { text-decoration: underline; }
 
   #cat-paw {
     position: absolute;
-    display: none;
+    left: 0;
+    top: 0;
     z-index: 2;
+    display: none;
     font-size: 25px;
     pointer-events: none;
   }
@@ -1153,24 +1156,35 @@ footer a:hover { text-decoration: underline; }
   }
 
   @keyframes catTap {
-    0% { transform: scale(.4) rotate(-25deg); opacity: 0; }
-    45% { transform: scale(1.2) rotate(12deg); opacity: 1; }
-    100% { transform: scale(.8); opacity: 0; }
-  }
-
-  @keyframes donutFade {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    0% {
+      transform: scale(.4) rotate(-25deg);
+      opacity: 0;
+    }
+    45% {
+      transform: scale(1.2) rotate(12deg);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(.8);
+      opacity: 0;
+    }
   }
 
   @media (max-width: 480px) {
-    #donut-float { right: 14px; bottom: 14px; }
-    #donut-card { padding: 23px; }
+    #donut-float {
+      right: 14px;
+      bottom: 14px;
+    }
+
+    #donut-card {
+      padding: 22px;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    #donut-modal.open { animation: none; }
-    #donut-float, #chase-cat { transition: none; }
+    #donut-float {
+      transition: none;
+    }
   }
 </style>
 
@@ -1182,12 +1196,15 @@ footer a:hover { text-decoration: underline; }
 
 <div id="donut-modal" role="dialog"
      aria-modal="true" aria-labelledby="donut-title">
+
   <section id="donut-card">
     <button id="donut-close" type="button"
             aria-label="Close popup">×</button>
 
     <div style="font-size:36px" aria-hidden="true">🍩</div>
+
     <h2 id="donut-title">Buy the creator a doughnut</h2>
+
     <p>
       Buying him a doughnut isn't possible right now.
       But you can still say hello, send a message,
@@ -1195,12 +1212,18 @@ footer a:hover { text-decoration: underline; }
     </p>
 
     <div id="cat-playground" aria-label="Play with the cat">
-      <div id="cat-speech">psst... buy my human a doughnut 🍩</div>
+      <div id="cat-speech">
+        psst... buy my human a doughnut 🍩
+      </div>
+
       <span id="chase-cat" aria-hidden="true">🐈</span>
       <span id="cat-paw" aria-hidden="true">🐾</span>
     </div>
 
-    <p style="margin-bottom:8px">Made with caffeine and questionable decisions by:</p>
+    <p style="margin-bottom:8px">
+      Made with caffeine and questionable decisions by:
+    </p>
+
     <h3 style="margin:0;font-size:20px">Sadid Ahnaf</h3>
 
     <a class="donut-contact" href="mailto:sadidahnaf2@gmail.com">
@@ -1208,7 +1231,7 @@ footer a:hover { text-decoration: underline; }
     </a>
 
     <a class="donut-contact"
-      href="https://www.instagram.com/_isolxte_/"
+       href="https://www.instagram.com/_isolxte_/"
        target="_blank" rel="noopener noreferrer">
       📷 Instagram · @_isolxte_ ↗
     </a>
@@ -1229,26 +1252,99 @@ footer a:hover { text-decoration: underline; }
   const paw = document.getElementById('cat-paw');
   const speech = document.getElementById('cat-speech');
 
-  if (!button || !modal || !area || !cat || !paw) return;
+  if (!button || !modal || !close || !area ||
+      !cat || !paw || !speech) return;
 
-  let targetX = 0;
-  let targetY = 45;
   let currentX = 0;
-  let currentY = 45;
+  let currentY = 55;
+  let targetX = 0;
+  let targetY = 55;
+  let facing = 1;
   let animationFrame = null;
   let previousFocus = null;
+  let pointerInside = false;
+
+  // Keep the cat's position within the playground.
+  function clamp(value, min, max) {
+    return Math.max(min, Math.min(value, max));
+  }
+
+  // Start or update the cat's chase target.
+  function positionCat(pointerX, pointerY) {
+    const catWidth = cat.offsetWidth || 43;
+    const catHeight = cat.offsetHeight || 43;
+
+    const maxX = Math.max(0, area.clientWidth - catWidth);
+    const maxY = Math.max(0, area.clientHeight - catHeight);
+
+    // Face the direction the pointer is moving.
+    const deltaX = pointerX - (currentX + catWidth / 2);
+    if (Math.abs(deltaX) > 2) {
+      facing = deltaX < 0 ? -1 : 1;
+    }
+
+    // Chase from just behind the pointer, not directly on top of it.
+    const gap = 13;
+    const desiredX = pointerX - catWidth / 2 - facing * gap;
+    const desiredY = pointerY - catHeight / 2;
+
+    targetX = clamp(desiredX, 0, maxX);
+    targetY = clamp(desiredY, 0, maxY);
+
+    if (animationFrame === null) {
+      animationFrame = requestAnimationFrame(animateCat);
+    }
+  }
+
+  // Smooth chase loop. Only one animation loop can run at a time.
+  function animateCat() {
+    const dx = targetX - currentX;
+    const dy = targetY - currentY;
+
+    // A quick chase with a small natural delay.
+    currentX += dx * 0.32;
+    currentY += dy * 0.32;
+
+    if (Math.abs(dx) < 0.5) currentX = targetX;
+    if (Math.abs(dy) < 0.5) currentY = targetY;
+
+    cat.style.transform =
+      `translate(${currentX}px, ${currentY}px) scaleX(${facing})`;
+
+    const remainingX = targetX - currentX;
+    const remainingY = targetY - currentY;
+
+    if (Math.abs(remainingX) > 0.5 ||
+        Math.abs(remainingY) > 0.5) {
+      animationFrame = requestAnimationFrame(animateCat);
+    } else {
+      animationFrame = null;
+    }
+  }
 
   function openModal() {
     previousFocus = document.activeElement;
     modal.classList.add('open');
     close.focus();
-    positionCat(area.clientWidth * .45, 78);
+
+    // Start the cat near the center.
+    currentX = Math.max(0, area.clientWidth * 0.43);
+    currentY = Math.max(35, area.clientHeight * 0.48);
+    targetX = currentX;
+    targetY = currentY;
+
+    cat.style.transform =
+      `translate(${currentX}px, ${currentY}px) scaleX(${facing})`;
   }
 
   function closeModal() {
     modal.classList.remove('open');
     paw.classList.remove('tap');
-    if (previousFocus) previousFocus.focus();
+    pointerInside = false;
+
+    if (previousFocus && typeof previousFocus.focus === 'function') {
+      previousFocus.focus();
+    }
   }
 
   button.addEventListener('click', openModal);
@@ -1264,35 +1360,21 @@ footer a:hover { text-decoration: underline; }
     }
   });
 
- 
-function positionCat(x, y) {
-  const maxX = Math.max(0, area.clientWidth - cat.offsetWidth);
-  const maxY = Math.max(0, area.clientHeight - cat.offsetHeight);
-
-  targetX = Math.max(0, Math.min(x - cat.offsetWidth / 2, maxX));
-  targetY = Math.max(0, Math.min(y - cat.offsetHeight / 2, maxY));
-
-  currentX = targetX;
-  currentY = targetY;
-
-  cat.style.transition = 'none';
-  cat.style.left = '0';
-  cat.style.top = '0';
-  cat.style.transform = `translate(${currentX}px, ${currentY}px)`;
-}
-
-
- 
-function animateCat() {
-  animationFrame = null;
-}
-
+  // Convert screen coordinates to playground coordinates.
+  area.addEventListener('pointerenter', () => {
+    pointerInside = true;
+  });
 
   area.addEventListener('pointermove', event => {
     const rect = area.getBoundingClientRect();
-    positionCat(event.clientX - rect.left, event.clientY - rect.top);
+
+    positionCat(
+      event.clientX - rect.left,
+      event.clientY - rect.top
+    );
   });
 
+  // The cat taps the clicked position.
   area.addEventListener('pointerdown', event => {
     const rect = area.getBoundingClientRect();
     const x = event.clientX - rect.left;
@@ -1300,26 +1382,32 @@ function animateCat() {
 
     positionCat(x, y);
 
-    paw.style.left = `${Math.max(0, Math.min(x - 12, area.clientWidth - 30))}px`;
-    paw.style.top = `${Math.max(0, Math.min(y - 12, area.clientHeight - 30))}px`;
+    paw.style.left = `${clamp(x - 12, 0, area.clientWidth - 30)}px`;
+    paw.style.top = `${clamp(y - 12, 0, area.clientHeight - 30)}px`;
 
     paw.classList.remove('tap');
     void paw.offsetWidth;
     paw.classList.add('tap');
 
-    speech.textContent = [
+    const messages = [
       'psst... doughnut for my human? 🍩',
       'meow! he deserves a treat 🐾',
       'no doughnut? at least say hi! 😼',
-      'I work for imaginary snacks.'
-    ][Math.floor(Math.random() * 4)];
+      'I work for imaginary snacks.',
+      'PLEASE. I have tiny paws. 🐾'
+    ];
+
+    speech.textContent =
+      messages[Math.floor(Math.random() * messages.length)];
   });
 
   area.addEventListener('pointerleave', () => {
+    pointerInside = false;
     speech.textContent = 'come back! I need to ask you something 🐾';
   });
 })();
 </script>
+<!-- ===== END DOUGHNUT POPUP ===== -->
 
 </body>
 </html>
