@@ -1264,31 +1264,29 @@ footer a:hover { text-decoration: underline; }
     }
   });
 
-  function positionCat(x, y) {
-    const maxX = Math.max(0, area.clientWidth - 50);
-    const maxY = Math.max(35, area.clientHeight - 55);
+ 
+function positionCat(x, y) {
+  const maxX = Math.max(0, area.clientWidth - cat.offsetWidth);
+  const maxY = Math.max(0, area.clientHeight - cat.offsetHeight);
 
-    targetX = Math.max(0, Math.min(x - 24, maxX));
-    targetY = Math.max(35, Math.min(y - 24, maxY));
+  targetX = Math.max(0, Math.min(x - cat.offsetWidth / 2, maxX));
+  targetY = Math.max(0, Math.min(y - cat.offsetHeight / 2, maxY));
 
-    if (!animationFrame) animateCat();
-  }
+  currentX = targetX;
+  currentY = targetY;
 
-  function animateCat() {
-    currentX += (targetX - currentX) * .22;
-    currentY += (targetY - currentY) * .22;
+  cat.style.transition = 'none';
+  cat.style.left = '0';
+  cat.style.top = '0';
+  cat.style.transform = `translate(${currentX}px, ${currentY}px)`;
+}
 
-    const direction = targetX < currentX ? -1 : 1;
-    cat.style.transform =
-      `translate(${currentX}px, ${currentY}px) scaleX(${direction})`;
 
-    if (Math.abs(targetX - currentX) > .5 ||
-        Math.abs(targetY - currentY) > .5) {
-      animationFrame = requestAnimationFrame(animateCat);
-    } else {
-      animationFrame = null;
-    }
-  }
+ 
+function animateCat() {
+  animationFrame = null;
+}
+
 
   area.addEventListener('pointermove', event => {
     const rect = area.getBoundingClientRect();
