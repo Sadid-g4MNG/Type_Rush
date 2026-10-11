@@ -990,5 +990,338 @@ footer a:hover { text-decoration: underline; }
   reset();
 })();
 </script>
+
+<!-- Type Rush: Buy the Creator a Doughnut -->
+<style>
+  #donut-float {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 9998;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #ffffff24;
+    border-radius: 999px;
+    padding: 12px 15px;
+    background: #181818;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 8px 30px #0004;
+    transition: transform .25s, background .25s;
+    font: inherit;
+  }
+
+  #donut-float:hover {
+    transform: translateY(-4px) scale(1.03);
+    background: #29221f;
+  }
+
+  #donut-icon {
+    font-size: 25px;
+  }
+
+  #donut-label {
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: max-width .3s, opacity .3s;
+  }
+
+  #donut-float:hover #donut-label,
+  #donut-float:focus-visible #donut-label {
+    max-width: 220px;
+    opacity: 1;
+  }
+
+  #donut-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    place-items: center;
+    padding: 20px;
+    background: #0009;
+    backdrop-filter: blur(8px);
+  }
+
+  #donut-modal.open {
+    display: grid;
+    animation: donutFade .2s ease;
+  }
+
+  #donut-card {
+    position: relative;
+    width: min(490px, 100%);
+    max-height: 85vh;
+    overflow: auto;
+    padding: 30px;
+    border: 1px solid #ffffff1c;
+    border-radius: 22px;
+    background: #171717;
+    color: #f5f5f5;
+    box-shadow: 0 25px 90px #0008;
+    font-family: inherit;
+  }
+
+  #donut-card h2 {
+    margin: 8px 0;
+    font-size: 27px;
+  }
+
+  #donut-card p {
+    color: #bdbdbd;
+    line-height: 1.65;
+  }
+
+  #donut-close {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    border: 0;
+    background: transparent;
+    color: #ccc;
+    font-size: 25px;
+    cursor: pointer;
+  }
+
+  .donut-contact {
+    display: block;
+    margin-top: 12px;
+    padding: 13px 15px;
+    border: 1px solid #ffffff18;
+    border-radius: 12px;
+    color: #f5f5f5;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    transition: background .2s;
+  }
+
+  .donut-contact:hover {
+    background: #ffffff10;
+  }
+
+  #cat-playground {
+    position: relative;
+    height: 145px;
+    margin: 18px 0;
+    overflow: hidden;
+    border: 1px solid #ffffff12;
+    border-radius: 16px;
+    background: #22201e;
+    cursor: crosshair;
+    touch-action: manipulation;
+  }
+
+  #chase-cat {
+    position: absolute;
+    left: 40%;
+    top: 35px;
+    font-size: 48px;
+    line-height: 1;
+    pointer-events: none;
+    will-change: transform;
+    transition: transform .12s ease-out;
+    filter: drop-shadow(0 5px 4px #0006);
+  }
+
+  #cat-speech {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    max-width: 190px;
+    padding: 7px 10px;
+    border-radius: 12px 12px 12px 3px;
+    background: #fff1dc;
+    color: #53351f;
+    font-size: 12px;
+    pointer-events: none;
+  }
+
+  #cat-paw {
+    position: absolute;
+    display: none;
+    z-index: 2;
+    font-size: 25px;
+    pointer-events: none;
+  }
+
+  #cat-paw.tap {
+    display: block;
+    animation: catTap .35s ease-out forwards;
+  }
+
+  @keyframes catTap {
+    0% { transform: scale(.4) rotate(-25deg); opacity: 0; }
+    45% { transform: scale(1.2) rotate(12deg); opacity: 1; }
+    100% { transform: scale(.8); opacity: 0; }
+  }
+
+  @keyframes donutFade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @media (max-width: 480px) {
+    #donut-float { right: 14px; bottom: 14px; }
+    #donut-card { padding: 23px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #donut-modal.open { animation: none; }
+    #donut-float, #chase-cat { transition: none; }
+  }
+</style>
+
+<button id="donut-float" type="button"
+        aria-label="Buy the creator a doughnut">
+  <span id="donut-icon">🍩</span>
+  <span id="donut-label">Buy the creator a doughnut</span>
+</button>
+
+<div id="donut-modal" role="dialog"
+     aria-modal="true" aria-labelledby="donut-title">
+  <section id="donut-card">
+    <button id="donut-close" type="button"
+            aria-label="Close popup">×</button>
+
+    <div style="font-size:36px" aria-hidden="true">🍩</div>
+    <h2 id="donut-title">Buy the creator a doughnut</h2>
+    <p>
+      Buying him a doughnut isn't possible right now.
+      But you can still say hello, send a message,
+      or follow his adventures!
+    </p>
+
+    <div id="cat-playground" aria-label="Play with the cat">
+      <div id="cat-speech">psst... buy my human a doughnut 🍩</div>
+      <span id="chase-cat" aria-hidden="true">🐈</span>
+      <span id="cat-paw" aria-hidden="true">🐾</span>
+    </div>
+
+    <p style="margin-bottom:8px">Made with caffeine and questionable decisions by:</p>
+    <h3 style="margin:0;font-size:20px">Sadid Ahnaf</h3>
+
+    <a class="donut-contact" href="mailto:sadidahnaf2@gmail.com">
+      ✉️ Email · sadidahnaf2@gmail.com
+    </a>
+
+    <a class="donut-contact"
+       href="https://www.instagram.com/isolxte/"
+       target="_blank" rel="noopener noreferrer">
+      📷 Instagram · @isolxte ↗
+    </a>
+
+    <p style="font-size:12px;margin-bottom:0">
+      The cat accepts imaginary doughnuts. 🐈
+    </p>
+  </section>
+</div>
+
+<script>
+(() => {
+  const button = document.getElementById('donut-float');
+  const modal = document.getElementById('donut-modal');
+  const close = document.getElementById('donut-close');
+  const area = document.getElementById('cat-playground');
+  const cat = document.getElementById('chase-cat');
+  const paw = document.getElementById('cat-paw');
+  const speech = document.getElementById('cat-speech');
+
+  if (!button || !modal || !area || !cat || !paw) return;
+
+  let targetX = 0;
+  let targetY = 45;
+  let currentX = 0;
+  let currentY = 45;
+  let animationFrame = null;
+  let previousFocus = null;
+
+  function openModal() {
+    previousFocus = document.activeElement;
+    modal.classList.add('open');
+    close.focus();
+    positionCat(area.clientWidth * .45, 78);
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    paw.classList.remove('tap');
+    if (previousFocus) previousFocus.focus();
+  }
+
+  button.addEventListener('click', openModal);
+  close.addEventListener('click', closeModal);
+
+  modal.addEventListener('click', event => {
+    if (event.target === modal) closeModal();
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && modal.classList.contains('open')) {
+      closeModal();
+    }
+  });
+
+  function positionCat(x, y) {
+    const maxX = Math.max(0, area.clientWidth - 50);
+    const maxY = Math.max(35, area.clientHeight - 55);
+
+    targetX = Math.max(0, Math.min(x - 24, maxX));
+    targetY = Math.max(35, Math.min(y - 24, maxY));
+
+    if (!animationFrame) animateCat();
+  }
+
+  function animateCat() {
+    currentX += (targetX - currentX) * .22;
+    currentY += (targetY - currentY) * .22;
+
+    const direction = targetX < currentX ? -1 : 1;
+    cat.style.transform =
+      `translate(${currentX}px, ${currentY}px) scaleX(${direction})`;
+
+    if (Math.abs(targetX - currentX) > .5 ||
+        Math.abs(targetY - currentY) > .5) {
+      animationFrame = requestAnimationFrame(animateCat);
+    } else {
+      animationFrame = null;
+    }
+  }
+
+  area.addEventListener('pointermove', event => {
+    const rect = area.getBoundingClientRect();
+    positionCat(event.clientX - rect.left, event.clientY - rect.top);
+  });
+
+  area.addEventListener('pointerdown', event => {
+    const rect = area.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    positionCat(x, y);
+
+    paw.style.left = `${Math.max(0, Math.min(x - 12, area.clientWidth - 30))}px`;
+    paw.style.top = `${Math.max(0, Math.min(y - 12, area.clientHeight - 30))}px`;
+
+    paw.classList.remove('tap');
+    void paw.offsetWidth;
+    paw.classList.add('tap');
+
+    speech.textContent = [
+      'psst... doughnut for my human? 🍩',
+      'meow! he deserves a treat 🐾',
+      'no doughnut? at least say hi! 😼',
+      'I work for imaginary snacks.'
+    ][Math.floor(Math.random() * 4)];
+  });
+
+  area.addEventListener('pointerleave', () => {
+    speech.textContent = 'come back! I need to ask you something 🐾';
+  });
+})();
+</script>
+
 </body>
 </html>
